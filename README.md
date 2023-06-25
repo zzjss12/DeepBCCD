@@ -27,8 +27,8 @@
 * [Maintainers](##maintainers)
 
 ## Features ✨
-* Feature 1.
-* Feature 2.
+* With advancements made through the Gemini method, the AUC (Area Under the Curve) value can reach approximately 99.73%.
+* Provides a way to construct data set and extract binary function file (2_gen_features.py).
 * ...
 
 ## Install 🐙
