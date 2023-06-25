@@ -32,7 +32,10 @@
 * ...
 
 ## Install 🐙
-Explain to your users how they can install your product :)
+It is recommended that you install a conda environment and then install the dependent packages with the following command：
+* conda create -n DeepBCCD37 -y python==3.7.16 && conda activate DeepBCCD37
+* pip install -r requirements.txt
+
 
 ## Usage 💡
 In this section you can write some popular examples about how you can interact with the project. It's advisable to write some code here.
