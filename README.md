@@ -21,7 +21,8 @@
 * [Usage](##usage)
 * [Exemples](##exemples)
 * [Documentation](##documentation)
-* [Datasets](##Datasets)
+* [Datasets](##datasets)
+* [Evaluation](##evaluation)
 * [Maintainers](##maintainers)
 
 ## Description ✨
