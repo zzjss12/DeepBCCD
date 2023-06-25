@@ -67,7 +67,7 @@ List of maintainers, replace all `href`, `src` attributes by your maintainers da
 </table>
 
 ## License ⚖️
-Enter what kind of license you're using.
+GPL
 
 ---
 <div align="center">
