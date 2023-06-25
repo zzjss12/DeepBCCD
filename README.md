@@ -11,6 +11,13 @@
      <i>A method to detect binary code clone.</i>
   </p>
   <p>
+[![Build Status](https://travis-ci.com/luctst/get-readme.svg?branch=master)](https://travis-ci.com/luctst/get-readme)
+[![NPM version](https://img.shields.io/npm/v/get-readme?style=flat-square)](https://img.shields.io/npm/v/get-readme?style=flat-square)
+[![Package size](https://img.shields.io/bundlephobia/min/get-readme)](https://img.shields.io/bundlephobia/min/get-readme)
+[![Dependencies](https://img.shields.io/david/luctst/get-readme.svg?style=popout-square)](https://david-dm.org/luctst/get-readme)
+[![devDependencies Status](https://david-dm.org/luctst/get-readme/dev-status.svg?style=flat-square)](https://david-dm.org/luctst/get-readme?type=dev)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+[![Twitter](https://img.shields.io/twitter/follow/luctstt.svg?label=Follow&style=social)](https://twitter.com/luctstt)
   </p>
 </div>
 
