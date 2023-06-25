@@ -8,18 +8,9 @@
     <b>DeepBCCD</b>
   </p>
   <p>
-     <i>a tool to detect binary code clone.</i>
+     <i>A method to detect binary code clone.</i>
   </p>
   <p>
-
-[![Build Status](https://travis-ci.com/who/DeepBCCD.svg?branch=master)](https://travis-ci.com/who/DeepBCCD)
-[![NPM version](https://img.shields.io/npm/v/DeepBCCD?style=flat-square)](https://img.shields.io/npm/v/DeepBCCD?style=flat-square)
-[![Package size](https://img.shields.io/bundlephobia/min/DeepBCCD)](https://img.shields.io/bundlephobia/min/DeepBCCD)
-[![Dependencies](https://img.shields.io/david/who/DeepBCCD.svg?style=popout-square)](https://david-dm.org/who/DeepBCCD)
-[![devDependencies Status](https://david-dm.org/who/DeepBCCD/dev-status.svg?style=flat-square)](https://david-dm.org/who/DeepBCCD?type=dev)
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
-[![Twitter](https://img.shields.io/twitter/follow/luctstt.svg?label=Follow&style=social)](https://twitter.com/luctstt)
-
   </p>
 </div>
 
@@ -32,7 +23,6 @@
 * [Usage](##usage)
 * [Exemples](##exemples)
 * [Documentation](##documentation)
-* [API](##Api)
 * [Contributing](##contributing)
 * [Maintainers](##maintainers)
 
