@@ -40,16 +40,17 @@ pip install -r requirements.txt
 ```
 
 ## Usage 💡
-1. git clone the project
+1. git clone the project.
 ```
 git clone https:// -d your_profile
 ```
 2. Go inside the project folder(IDE) and open your terminal.
-3. See  [Install](##install) to install the environment
+3. See  [Install](##install) to install the environment.
+4. run the command 'python run.py --train true --test true' to start
 
 ## Exemples 🖍
 ```
-Show some code
+python run.py --train true --test true --w2v_dim 100 --batch_size 512--max_block_seq 20--num_block 20 --iter_level 5 
 ```
 
 ## Documentation 📄
