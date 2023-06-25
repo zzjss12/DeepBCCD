@@ -59,7 +59,8 @@ For the **BinaryCrop-26M** dataset, we will try it in the future because it requ
 
 
 ## Maintainers 👷
-@
+@zzjss12
+Email:s211231082@stu.cqupt.edu.cn
 
 ## License ⚖️
 GPL
