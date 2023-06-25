@@ -26,9 +26,7 @@
 * [Maintainers](##maintainers)
 
 ## Description ✨
-* With advancements made through the Gemini method, the AUC (Area Under the Curve) value can reach approximately 99.73%.
-* Provides a way to construct data set and extract binary function file (2_gen_features.py).
-* ...
+DeepBCCD is a binary code clone detection method, which is improved on the basis of the Gemini method, and the final AUC value can reach about 99.7%. For more specific information, please refer to paper ().
 
 ## Install 🐙
 It is recommended that you install a conda environment and then install the dependent packages with the following command：
