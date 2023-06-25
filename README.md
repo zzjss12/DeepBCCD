@@ -8,7 +8,7 @@
     <b>DeepBCCD</b>
   </p>
   <p>
-     <i>A method to detect binary code clone.</i>
+     <i>DeepBCCD is designed to detect binary code similarities. DeepBCCD has made great improvements on the basis of the Gemini method, DeepBCCD not only uses the CFG structure information in the upper binary code, but also uses the LSTM network to extract the sequence information between the binary code instructions.</i>
   </p>
 </div>
 
