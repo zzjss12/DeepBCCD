@@ -35,12 +35,14 @@
 ## Install 🐙
 It is recommended that you install a conda environment and then install the dependent packages with the following command：
 ```
-* conda create -n DeepBCCD37 -y python==3.7.16 && conda activate DeepBCCD37
-* pip install -r requirements.txt
+conda create -n DeepBCCD37 -y python==3.7.16 && conda activate DeepBCCD37
+pip install -r requirements.txt
 ```
 
 ## Usage 💡
-1. Create a new folder.
+1. ```
+Show some code
+```
 2. Open your terminal and go inside the new folder.
 3. If you had npx:
 	* if you had npx run `npx get-good-readme` and follow the instructions.
