@@ -59,12 +59,7 @@ For the **BinaryCrop-26M** dataset, we will try it in the future because it requ
 
 
 ## Maintainers 👷
-List of maintainers, replace all `href`, `src` attributes by your maintainers datas.
-<table>
-  <tr>
-    <td align="center"><a href="https://lucastostee.now.sh/"><img src="https://avatars3.githubusercontent.com/u/22588842?s=460&v=4" width="100px;" alt="Tostee Lucas"/><br /><sub><b>Tostee Lucas</b></sub></a><br /><a href="#" title="Code">💻</a></td>
-  </tr>
-</table>
+@
 
 ## License ⚖️
 GPL
