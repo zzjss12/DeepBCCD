@@ -40,8 +40,9 @@ pip install -r requirements.txt
 ```
 
 ## Usage 💡
-1. ```
-Show some code
+1. git clone the project
+```
+git clone https:// -d your_profile
 ```
 2. Open your terminal and go inside the new folder.
 3. If you had npx:
