@@ -53,6 +53,7 @@ python run.py --train true --test true --w2v_dim 100 --batch_size 512--max_block
 For a more detailed description of the contents of DeepBCCD, please refer to our paper-----
 
 ## Datasets 👩‍💻
+https://github.com/vul337/jTrans
 BinaryCrop-3M
 
 ## Evaluation 🍰
