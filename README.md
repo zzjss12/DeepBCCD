@@ -42,7 +42,7 @@ git clone https:// -d your_profile
 ```
 2. Go inside the project folder(IDE) and open your terminal.
 3. See  [Install](##install) to install the environment.
-4. run the command `python run.py --train true --test true` to start
+4. run the command `python run.py --train true --test true` to start.
 
 ## Exemples 🖍
 ```
