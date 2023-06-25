@@ -44,13 +44,8 @@ pip install -r requirements.txt
 ```
 git clone https:// -d your_profile
 ```
-2. Open your terminal and go inside the new folder.
-3. If you had npx:
-	* if you had npx run `npx get-good-readme` and follow the instructions.
-4. If you don't have npx:
-	* Check the install section to install the package globally.
-	* Then execute the tasks number 1 and 2.
-	* Run `get-good-readme` in your terminal.
+2. Go inside the project folder(IDE) and open your terminal.
+3. See  [Install](##install) to install the environment
 
 ## Exemples 🖍
 ```
