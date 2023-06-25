@@ -22,7 +22,6 @@
 * [Exemples](##exemples)
 * [Documentation](##documentation)
 * [Datasets](##Datasets)
-* [Contributing](##contributing)
 * [Maintainers](##maintainers)
 
 ## Description ✨
@@ -54,11 +53,6 @@ If your project has some documentation you can link anything here.
 
 ## Datasets 👩‍💻
 BinaryCrop-3M
-
-## Contributing 🍰
-Please make sure to read the [Contributing Guide]() before making a pull request.
-
-Thank you to all the people who already contributed to this project!
 
 ## Maintainers 👷
 List of maintainers, replace all `href`, `src` attributes by your maintainers datas.
