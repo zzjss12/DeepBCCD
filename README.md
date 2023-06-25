@@ -50,7 +50,7 @@ python run.py --train true --test true --w2v_dim 100 --batch_size 512--max_block
 ```
 
 ## Documentation 📄
-If your project has some documentation you can link anything here.
+For a more detailed description of the contents of DeepBCCD, please refer to our paper-----
 
 ## Datasets 👩‍💻
 BinaryCrop-3M
