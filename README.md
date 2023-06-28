@@ -61,8 +61,6 @@ The dataset used in DeepBCCD [download](https://efss.qloud.my/index.php/s/a2B2S9
 ## Evaluation 🍰
 ![best_test_roc](https://github.com/zzjss12/DeepBCCD/assets/66284098/4de96d6d-13f8-46fb-9981-554bc4d5c784)
 
-![Uploading loss.png…]()
-
 ## Maintainers 👷
 * @zzjss12
 * Email:s211231082@stu.cqupt.edu.cn
