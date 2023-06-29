@@ -1,17 +1,17 @@
 
 ## If you want to examine the code of other projects, refer to the following procedure：
-1.参考 vulseeker
+1.Reference vulseeker(https://github.com/buptsseGJ/VulSeeker)
 
-2.将build_datasets目录下的2_gen_features.py文件替换掉vulseeker的2_gen_features.py
+2.Replace the 2_gen_features.py file in the build_datasets directory with the 2_gen_features.py file in vulseeker.
 
-3.通过vulseker 可以提取出待检测的二进制函数集存放在 json文件中
+3.vulseker can extract the binary function collection to be detected and store it in json file.
 
-4.通过drug_datasets_from_json.py文件从json文件中提取出训练集和测试集
+4.The training set and test set are extracted from the json file using the drug_datasets_from_json.py file.
 
 
 
-#利用我提供的数据集,重新构建训练集和测试集合，参考下述过程：
-通过drug_datasets_from_json.py文件从json(已提供两个json)文件中提取出训练集和测试集
+## If you just want to rebuild the training and test sets using the data sets I've provided, follow the procedure below:
+The training and test sets are extracted from the json(two Jsons are provided) files using the drug_datasets_from_json.py file.
 
 
 
