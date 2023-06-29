@@ -27,6 +27,8 @@
 
 ## Description ✨
 Gemini is a way to leverage structural information between basic blocks, but it doesn't take into account sequential relationships between instructions。DeepBCCD is a binary code clone detection method, which is improved on the basis of the Gemini method, and the final **AUC** value can reach about **99.7%**. For more specific information, please refer to paper------.
+####The DeepBCCD Model 
+![Uploading IPBN@ISI]{05V[~J[0NUTVO.png…]()
 
 ## Install 🐙
 It is recommended that you install a conda environment and then install the dependent packages with the following command：
@@ -45,7 +47,7 @@ git clone https:// -d your_profile
 4. run the command `python run.py --train true --test true` to start.
 
 ## Exemples 🖍
-We trained with the **A5000**.
+We trained with the **A5000** GPU.
 ```
 python run.py --train true --test true --w2v_dim 100 --batch_size 512--max_block_seq 20--num_block 20 --iter_level 5 
 ```
