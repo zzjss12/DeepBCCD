@@ -3,7 +3,7 @@
   	<img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy-downsized.gif" alt="Logo project" height="160" />
   </a>
   <br>
-  <br>
+  <br>s
   <p>
     <b>DeepBCCD</b>
   </p>
