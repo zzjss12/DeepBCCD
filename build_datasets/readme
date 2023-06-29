@@ -1,5 +1,5 @@
 
-#如果想要检测其它项目的代码，参考下述过程：
+## If you want to examine the code of other projects, refer to the following procedure：
 1.参考 vulseeker
 
 2.将build_datasets目录下的2_gen_features.py文件替换掉vulseeker的2_gen_features.py
