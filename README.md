@@ -63,7 +63,6 @@ The dataset used in DeepBCCD [download](https://efss.qloud.my/index.php/s/a2B2S9
 
 ## Maintainers 👷
 * @zzjss12
-* Email:s211231082@stu.cqupt.edu.cn
 
 ## License ⚖️
 GPL
