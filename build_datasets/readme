@@ -1,0 +1,17 @@
+
+#如果想要检测其它项目的代码，参考下述过程：
+1.参考 vulseeker
+
+2.将build_datasets目录下的2_gen_features.py文件替换掉vulseeker的2_gen_features.py
+
+3.通过vulseker 可以提取出待检测的二进制函数集存放在 json文件中
+
+4.通过drug_datasets_from_json.py文件从json文件中提取出训练集和测试集
+
+
+
+#利用我提供的数据集,重新构建训练集和测试集合，参考下述过程：
+通过drug_datasets_from_json.py文件从json(已提供两个json)文件中提取出训练集和测试集
+
+
+
