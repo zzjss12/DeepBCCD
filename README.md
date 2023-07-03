@@ -62,7 +62,7 @@ For the **BinaryCrop-26M** dataset, we will try it in the future because it requ
 The dataset used in DeepBCCD [download](https://efss.qloud.my/index.php/s/a2B2S9rNwdXkmBo).
 ## Evaluation 🍰
 #### The ROC curve is belowed:
-![best_test_roc](https://efss.qloud.my/index.php/s/tgyTyd9RBewfqp6)
+![best_test_roc](https://github.com/zzjss12/assets/blob/Binary-code-clone/best_test_roc.png)
 
 ## Maintainers 👷
 * @zzjss12
