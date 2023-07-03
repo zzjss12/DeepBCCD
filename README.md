@@ -40,7 +40,7 @@ pip install -r requirements.txt
 ## Usage 💡
 1. git clone the project.
 ```
-git clone [https://](https://github.com/zzjss12/DeepBCCD.git) -d your_profile
+git clone https://github.com/zzjss12/DeepBCCD.git -d your_profile
 ```
 2. Go inside the project folder(IDE) and open your terminal.
 3. See  [Install](##install) to install the environment.
