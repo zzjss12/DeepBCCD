@@ -12,11 +12,12 @@ from tensorflow.keras.optimizers import Nadam
 from tensorflow.keras import metrics as metric
 import matplotlib.pyplot as plt
 from sklearn.metrics import auc, roc_curve, recall_score, f1_score, accuracy_score, precision_score
-from tensorflow.keras.callbacks import EarlyStopping, CSVLogger, Callback, ModelCheckpoint,TensorBoard
+from tensorflow.keras.callbacks import EarlyStopping, CSVLogger, Callback, ModelCheckpoint, TensorBoard
 from sklearn.utils import shuffle
 import sys
 import os
-
+from fastevalKeras import eval
+from test import eval_test
 curPath = os.path.abspath(os.path.dirname(__file__))
 rootPath = os.path.split(curPath)[0]
 sys.path.append(rootPath)
@@ -57,7 +58,7 @@ class DeepBCCD_nework():
         self.input_mask1 = tf.keras.layers.Input(shape=[None, None, ])
         self.input_mask2 = tf.keras.layers.Input(shape=[None, None, ])
 
-        #LSTM1
+        # LSTM1
         self.LS1 = Lstm1(self.config)
 
         # iter network layer
@@ -67,14 +68,13 @@ class DeepBCCD_nework():
         self.bat2 = BatchNormalization(name="BatchNormalization2")
 
         self.ww1 = self.f_dim  # next LSTM input dim
-        #LSTM2
+        # LSTM2
         self.LS2 = tf.keras.layers.Bidirectional(
             tf.keras.layers.LSTM(self.ww1, kernel_initializer='glorot_uniform', dropout=0.5,
                                  kernel_regularizer=regularizers.l1_l2(0.001, 0.01),
                                  return_sequences=True, activation='tanh'))
         # atttion layer
         self.attention = Attention(self.config, return_sequences=False)
-
 
         # Fully connected layer
         self.Dense_1 = tf.keras.layers.Dense(128, activation="relu")
@@ -112,7 +112,7 @@ class DeepBCCD_nework():
         # node_val2 = tf.reshape(
         #     self.LS1(tf.reshape(encoded_right, [-1, self.config.max_block_seq, self.config.w2v_dim])),
         #     [tf.shape(encoded_right)[0], -1, self.ww1])
-        node_val2, cur_msg2=self.LS1(encoded_right)
+        node_val2, cur_msg2 = self.LS1(encoded_right)
         # cur_msg2 = tf.nn.relu(node_val2)
         ##iter network
         cur_msg2 = self.Iterative_network([self.input_mask2, cur_msg2, node_val2])
@@ -141,22 +141,21 @@ class DeepBCCD_nework():
 
         my_model.compile(optimizer=self.optimizer, loss='binary_crossentropy',
                          metrics=['accuracy', metric.AUC(name='auc'), metric.Precision(name='Precision'),
-                                  metric.Recall(name='Recall'),self.lr_metric])
+                                  metric.Recall(name='Recall'), self.lr_metric])
 
         self.model = my_model
 
     # trian and test
     def train(self):
-
         print("start train datasets inst to index")
         self.train_df = ins_to_index(self.train_df, self.config)  # instrution to index
 
         # train_iter
-        Data_loader_train = train_data_loader(self.train_df,self.config)
+        Data_loader_train = train_data_loader(self.train_df, self.config)
 
         # train
         self.model.fit(Data_loader_train, steps_per_epoch=int(len(self.train_df) / self.config.batch_size),
-                       shuffle=True,epochs=self.config.epochs, callbacks=self.my_callback(), max_queue_size=10,
+                       shuffle=True, epochs=self.config.epochs, callbacks=self.my_callback(), max_queue_size=10,
                        workers=1, verbose=1)
         # save weights
         self.model.save_weights(self.config.model_save_weights)
@@ -166,14 +165,13 @@ class DeepBCCD_nework():
 
     # test
     def test(self):
-
         print("start test datasets inst to index")
         self.test_df = ins_to_index(self.test_df, self.config)  # instrution to index
 
         # test AUC recall f1 acc pre
-        #self.model.load_weights(model_load_path(self.config))
+        # self.model.load_weights(model_load_path(self.config))
         self.model.load_weights(self.config.model_save_weights)
-        b1, g1, b2, g2, Y_test = test_data_process(self.test_df,self.config)
+        b1, g1, b2, g2, Y_test = test_data_process(self.test_df, self.config)
         pred = self.model.predict([b1, g1, b2, g2], batch_size=1)
         fpr, tpr, _ = roc_curve(Y_test, pred, pos_label=1)
         AUC = auc(fpr, tpr)
@@ -198,11 +196,11 @@ class DeepBCCD_nework():
         print("pre : ", pre)
 
         # test MRR and Recall@k
-        recall_at_k, mrr = test_MRR_Recall_k(self.model,self.config)
+        recall_at_k, mrr = test_MRR_Recall_k(self.model, self.config)
         print("PoolSize({:d})-Recall@{}: {:.4f}".format(self.config.poolsize, self.config.k, recall_at_k))
         print("PoolSize({:d})-:MRR: {:.4f}".format(self.config.poolsize, mrr))
 
-        with open(self.config.model_log_path + "test.csv", 'w', newline='')as file:
+        with open(self.config.model_log_path + "test.csv", 'w', newline='') as file:
             headers = ['train_nums', 'test_nums', 'AUC', 'Recall', 'F1-Score', 'ACC', 'Pre',
                        'Recall@1(poolsize-32)', 'MRR(poolsize-32)']
             f_csv = csv.writer(file)
@@ -211,12 +209,24 @@ class DeepBCCD_nework():
             test_result = [len(self.train_df), len(self.test_df), roc_auc, recall, f1, acc, pre, recall_at_k, mrr]
 
             f_csv.writerow(test_result)
-    
+
     def test_MRR_Recall_k(self):
         # test MRR and Recall@k
-        recall_at_k, mrr = test_MRR_Recall_k(self.model,self.config)
+        recall_at_k, mrr = test_MRR_Recall_k(self.model, self.config)
         print("PoolSize({:d})-Recall@{}: {:.4f}".format(self.config.poolsize, self.config.k, recall_at_k))
         print("PoolSize({:d})-:MRR: {:.4f}".format(self.config.poolsize, mrr))
+        #eval('O2','O3',self.model)
+
+    def test_MRR_Recall_k_all(self):
+        self.build_model()
+        self.model.load_weights(self.config.model_save_weights)
+        #eval_test(self.model)
+        eval('O0', 'O3', self.model)
+        eval('O1', 'O3', self.model)
+        eval('O2', 'O3', self.model)
+        eval('O0', 'Os', self.model)
+        eval('O1', 'Os', self.model)
+        eval('O2', 'Os', self.model)
 
     # get lr
     def get_lr_metric(self, optimizer):
@@ -234,10 +244,9 @@ class DeepBCCD_nework():
                                      save_freq=self.config.save_freq,
                                      save_weights_only=True)
 
-        #tensorboard_callback = TensorBoard(log_dir="./result/logs",write_images=True)
-        #too much callback will increase train time
-        return [EarlyStop,CsvLog,LossHistory(self.config)]#,tensorboard_callback]
-
+        # tensorboard_callback = TensorBoard(log_dir="./result/logs",write_images=True)
+        # too much callback will increase train time
+        return [EarlyStop, CsvLog, LossHistory(self.config)]  # ,tensorboard_callback]
 
 
 # Record loss value of every epoch
@@ -257,17 +266,18 @@ class LossHistory(Callback):
         plt.title('Training Loss')
         plt.savefig(self.config.model_log_path + 'loss.png')  # Save loss curve .png
 
+
 class Lstm1(tf.keras.Model):
     def __init__(self, Config):
         super(Lstm1, self).__init__()
         self.config = Config
         self.LS1 = tf.keras.layers.LSTM(self.config.f_dim, kernel_initializer='glorot_uniform', dropout=0.3,
-                                                return_sequences=False, activation='tanh')
-    def call(self, inputs):
+                                        return_sequences=False, activation='tanh')
 
+    def call(self, inputs):
         # output=self.LS1(inputs)
         node_val = tf.reshape(self.LS1(tf.reshape(inputs, [-1, self.config.max_block_seq, self.config.w2v_dim])),
-                               [tf.shape(inputs)[0], -1, self.config.ww1])
+                              [tf.shape(inputs)[0], -1, self.config.ww1])
         # cur_msg2 = tf.nn.relu(node_val2)
         cur_mag = tf.nn.relu(node_val)
         return node_val, cur_mag
