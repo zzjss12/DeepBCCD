@@ -102,8 +102,6 @@ def eval(TYPE1, TYPE2,model):
     # count = 0
     #print(datasets)
     for i in tqdm(range(0, int(len(datasets) / config.poolsize))):
-        if i % 100 == 0:
-            print(i)
         dataset = datasets[i * config.poolsize:(i * config.poolsize + config.poolsize)]
         # temp2 = funcarr2[i * config.poolsize:(i * config.poolsize + config.poolsize)]
         # print(temp1)
