@@ -41,52 +41,90 @@ def str_to_list(strr):
     return tempp
 
 
-def ins_to_index(datasets,config):
+def ins_to_index(datasets,model):
     # Replace the instruction with the corresponding index in this vector
 
-    model = models.KeyedVectors.load_word2vec_format(
-        config.w2v_load_path + 'window-5vector_size-100min_count-0sg-0workers-4sample-1e-05epoch-100.w2v', binary=True)
+    #model = models.KeyedVectors.load_word2vec_format(
+    #    config.w2v_load_path + 'window-5vector_size-100min_count-0sg-0workers-4sample-1e-05epoch-100.w2v', binary=True)
 
     # function1
     batch_f1_blocks = np.array(datasets['f1_blocks'])
-    for blocks in tqdm(range(0, len(batch_f1_blocks))):
-        # blocks ->[block1,block2...]
-        bb1 = batch_f1_blocks[blocks].strip('[]').split(', ')
-        bb1 = [s.strip('\'').strip(' ') for s in bb1]
-        batch_f1_blocks[blocks] = bb1
-        for i in range(0, len(bb1)):
-            bt = bb1[i].split(' ')
-            q2n = []
-            for j in range(0, len(bt)):
-                if bt[j] not in model.index_to_key:
-                    q2n.append(0)
-                    #print("Unknown workd is found!!!")
-                else:
-                    q2n.append(model.key_to_index[bt[j]] + 1)
+    if len(batch_f1_blocks) > 9999:
+        for blocks in tqdm(range(0, len(batch_f1_blocks))):
+            # blocks ->[block1,block2...]
+            bb1 = batch_f1_blocks[blocks].strip('[]').split(', ')
+            bb1 = [s.strip('\'').strip(' ') for s in bb1]
+            batch_f1_blocks[blocks] = bb1
+            for i in range(0, len(bb1)):
+                bt = bb1[i].split(' ')
+                q2n = []
+                for j in range(0, len(bt)):
+                    if bt[j] not in model.index_to_key:
+                        q2n.append(0)
+                        # print("Unknown workd is found!!!")
+                    else:
+                        q2n.append(model.key_to_index[bt[j]] + 1)
 
-            batch_f1_blocks[blocks][i] = q2n
+                batch_f1_blocks[blocks][i] = q2n
+    else:
+        for blocks in range(0, len(batch_f1_blocks)):
+            # blocks ->[block1,block2...]
+            bb1 = batch_f1_blocks[blocks].strip('[]').split(', ')
+            bb1 = [s.strip('\'').strip(' ') for s in bb1]
+            batch_f1_blocks[blocks] = bb1
+            for i in range(0, len(bb1)):
+                bt = bb1[i].split(' ')
+                q2n = []
+                for j in range(0, len(bt)):
+                    if bt[j] not in model.index_to_key:
+                        q2n.append(0)
+                        # print("Unknown workd is found!!!")
+                    else:
+                        q2n.append(model.key_to_index[bt[j]] + 1)
+
+                batch_f1_blocks[blocks][i] = q2n
     datasets['f1_blocks'] = batch_f1_blocks
 
     # function2
     batch_f2_blocks = np.array(datasets['f2_blocks'])
-    for blocks in tqdm(range(0, len(batch_f2_blocks))):
-        bb1 = batch_f2_blocks[blocks].strip('[]').split(', ')
-        bb1 = [s.strip('\'').strip(' ') for s in bb1]
-        batch_f2_blocks[blocks] = bb1
+    if len(batch_f2_blocks)>9999:
+        for blocks in tqdm(range(0, len(batch_f2_blocks))):
+            bb1 = batch_f2_blocks[blocks].strip('[]').split(', ')
+            bb1 = [s.strip('\'').strip(' ') for s in bb1]
+            batch_f2_blocks[blocks] = bb1
 
-        for i in range(0, len(bb1)):
-            bt = bb1[i].split(' ')
-            q2n = []
-            for j in range(0, len(bt)):
+            for i in range(0, len(bb1)):
+                bt = bb1[i].split(' ')
+                q2n = []
+                for j in range(0, len(bt)):
 
-                # print(bt[j])
-                if bt[j] not in model.index_to_key:
-                    q2n.append(0)
-                    #print("Unknown workd is found!!!")
-                else:
-                    q2n.append(model.key_to_index[bt[j]] + 1)
+                    # print(bt[j])
+                    if bt[j] not in model.index_to_key:
+                        q2n.append(0)
+                        # print("Unknown workd is found!!!")
+                    else:
+                        q2n.append(model.key_to_index[bt[j]] + 1)
 
-            batch_f2_blocks[blocks][i] = q2n
+                batch_f2_blocks[blocks][i] = q2n
+    else:
+        for blocks in range(0, len(batch_f2_blocks)):
+            bb1 = batch_f2_blocks[blocks].strip('[]').split(', ')
+            bb1 = [s.strip('\'').strip(' ') for s in bb1]
+            batch_f2_blocks[blocks] = bb1
+
+            for i in range(0, len(bb1)):
+                bt = bb1[i].split(' ')
+                q2n = []
+                for j in range(0, len(bt)):
+
+                    # print(bt[j])
+                    if bt[j] not in model.index_to_key:
+                        q2n.append(0)
+                        # print("Unknown workd is found!!!")
+                    else:
+                        q2n.append(model.key_to_index[bt[j]] + 1)
+
+                batch_f2_blocks[blocks][i] = q2n
     datasets['f2_blocks'] = batch_f2_blocks
     return datasets
 
