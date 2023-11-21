@@ -20,6 +20,8 @@ parser.add_argument('--train', type=bool, default=False,
                     help='train or not')
 parser.add_argument('--test', type=bool, default=False,
                     help='test or not')
+parser.add_argument('--mrr', type=bool, default=False,
+                    help='test or not')
 parser.add_argument('--w2v_dim', type=int, default=config.w2v_dim,
                     help='word embedding dimension')
 parser.add_argument('--batch_size', type=int, default=config.batch_size,
@@ -90,5 +92,7 @@ if __name__ == '__main__':
         # only test
         DeepBCCD_net.test()
 
-    DeepBCCD_net.test_MRR_Recall_k()
+    if args.mrr == True:
+        DeepBCCD_net.test_MRR_Recall_k_all()
+    #DeepBCCD_net.test_MRR_Recall_k()
     #command :(tensorboard --logdir=./result/logs) to open tensorboard on brower
