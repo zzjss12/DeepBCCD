@@ -41,11 +41,11 @@ def str_to_list(strr):
     return tempp
 
 
-def ins_to_index(datasets,model):
+def ins_to_index(datasets,config):
     # Replace the instruction with the corresponding index in this vector
 
-    #model = models.KeyedVectors.load_word2vec_format(
-    #    config.w2v_load_path + 'window-5vector_size-100min_count-0sg-0workers-4sample-1e-05epoch-100.w2v', binary=True)
+    model = models.KeyedVectors.load_word2vec_format(
+        config.w2v_load_path + 'window-5vector_size-100min_count-0sg-0workers-4sample-1e-05epoch-100.w2v', binary=True)
 
     # function1
     batch_f1_blocks = np.array(datasets['f1_blocks'])
