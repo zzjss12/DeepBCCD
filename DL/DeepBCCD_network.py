@@ -196,9 +196,9 @@ class DeepBCCD_nework():
         print("pre : ", pre)
 
         # test MRR and Recall@k
-        recall_at_k, mrr = test_MRR_Recall_k(self.model, self.config)
-        print("PoolSize({:d})-Recall@{}: {:.4f}".format(self.config.poolsize, self.config.k, recall_at_k))
-        print("PoolSize({:d})-:MRR: {:.4f}".format(self.config.poolsize, mrr))
+        #recall_at_k, mrr = test_MRR_Recall_k(self.model, self.config)
+        #print("PoolSize({:d})-Recall@{}: {:.4f}".format(self.config.poolsize, self.config.k, recall_at_k))
+        #print("PoolSize({:d})-:MRR: {:.4f}".format(self.config.poolsize, mrr))
 
         with open(self.config.model_log_path + "test.csv", 'w', newline='') as file:
             headers = ['train_nums', 'test_nums', 'AUC', 'Recall', 'F1-Score', 'ACC', 'Pre',
