@@ -49,7 +49,7 @@ git clone https://github.com/zzjss12/DeepBCCD.git -d your_profile
 ## Exemples 🖍
 We trained with the **A5000** GPU.
 ```
-python run.py --train true --test true --w2v_dim 100 --batch_size 512--max_block_seq 20--num_block 20 --iter_level 5 
+python run.py --train true --test true --mrr true --w2v_dim 100 --batch_size 512--max_block_seq 20--num_block 20 --iter_level 5 
 ```
 
 ## Documentation 📄
