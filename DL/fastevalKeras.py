@@ -102,6 +102,8 @@ def eval(TYPE1, TYPE2,model):
     # count = 0
     #print(datasets)
     for i in tqdm(range(0, int(len(datasets) / config.poolsize))):
+        if i % 100 == 0:
+            print(i)
         dataset = datasets[i * config.poolsize:(i * config.poolsize + config.poolsize)]
         # temp2 = funcarr2[i * config.poolsize:(i * config.poolsize + config.poolsize)]
         # print(temp1)
@@ -156,7 +158,7 @@ def eval(TYPE1, TYPE2,model):
                 g1_32[j] = g1_32[idx]
 
                 Y_32[j] = j
-            pred = model.predict([b1_32, g1_32, b2_32, g2_32], batch_size=1)
+            pred = model.predict([b1_32, g1_32, b2_32, g2_32], batch_size=100)
             #print(idx)
             # print(pred)
             pred = pred.flatten()
@@ -198,6 +200,8 @@ def eval(TYPE1, TYPE2,model):
         # print(SIMS)
     print(TYPE1, TYPE2, 'MRR{}: '.format(config.poolsize), np.array(SIMS).mean())
     print(TYPE1, TYPE2, 'Recall@1: ', np.array(Recall_AT_1).mean())
+    return np.array(SIMS).mean(),np.array(Recall_AT_1).mean()
+
     # dataloader = tf.data.Dataset((funcarr1, funcarr2)).batch(POOLSIZE)
     # for anchor, pos in tqdm(dataloader):
     #     # for i in range(len(anchor)):
