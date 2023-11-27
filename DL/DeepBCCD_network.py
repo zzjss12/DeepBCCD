@@ -17,7 +17,8 @@ from sklearn.utils import shuffle
 import sys
 import os
 from fastevalKeras import eval
-from test import eval_test
+
+
 curPath = os.path.abspath(os.path.dirname(__file__))
 rootPath = os.path.split(curPath)[0]
 sys.path.append(rootPath)
@@ -45,6 +46,7 @@ class DeepBCCD_nework():
         test_csv = self.config.test_csv_path
         self.test_df = pd.read_csv(test_csv, index_col=0)
         self.test_df = shuffle(self.test_df)
+        self.result = dict()
 
     def init_layers(self):
         self.w2v_model = models.KeyedVectors.load_word2vec_format(
@@ -194,40 +196,52 @@ class DeepBCCD_nework():
         print("f1 : ", f1)
         print("acc : ", acc)
         print("pre : ", pre)
-
+        self.result["recall"] = recall
+        self.result["f1"] = f1
+        self.result["acc"] = acc
+        self.result["pre"] = pre
+        self.result["roc_auc"] = roc_auc
         # test MRR and Recall@k
-        #recall_at_k, mrr = test_MRR_Recall_k(self.model, self.config)
-        #print("PoolSize({:d})-Recall@{}: {:.4f}".format(self.config.poolsize, self.config.k, recall_at_k))
-        #print("PoolSize({:d})-:MRR: {:.4f}".format(self.config.poolsize, mrr))
+        # recall_at_k, mrr = test_MRR_Recall_k(self.model, self.config)
+        # print("PoolSize({:d})-Recall@{}: {:.4f}".format(self.config.poolsize, self.config.k, recall_at_k))
+        # print("PoolSize({:d})-:MRR: {:.4f}".format(self.config.poolsize, mrr))
 
-        with open(self.config.model_log_path + "test.csv", 'w', newline='') as file:
-            headers = ['train_nums', 'test_nums', 'AUC', 'Recall', 'F1-Score', 'ACC', 'Pre',
-                       'Recall@1(poolsize-32)', 'MRR(poolsize-32)']
-            f_csv = csv.writer(file)
-            f_csv.writerow(headers)
-
-            test_result = [len(self.train_df), len(self.test_df), roc_auc, recall, f1, acc, pre, recall_at_k, mrr]
-
-            f_csv.writerow(test_result)
+        # with open(self.config.model_log_path + "test.csv", 'w', newline='') as file:
+        #     headers = ['train_nums', 'test_nums', 'AUC', 'Recall', 'F1-Score', 'ACC', 'Pre',
+        #                'Recall@1(poolsize-32)', 'MRR(poolsize-32)']
+        #     f_csv = csv.writer(file)
+        #     f_csv.writerow(headers)
+        #
+        #     test_result = [len(self.train_df), len(self.test_df), roc_auc, recall, f1, acc, pre, recall_at_k, mrr]
+        #
+        #     f_csv.writerow(test_result)
 
     def test_MRR_Recall_k(self):
         # test MRR and Recall@k
         recall_at_k, mrr = test_MRR_Recall_k(self.model, self.config)
         print("PoolSize({:d})-Recall@{}: {:.4f}".format(self.config.poolsize, self.config.k, recall_at_k))
         print("PoolSize({:d})-:MRR: {:.4f}".format(self.config.poolsize, mrr))
-        #eval('O2','O3',self.model)
+        # eval('O2','O3',self.model)
 
     def test_MRR_Recall_k_all(self):
         self.build_model()
         self.model.load_weights(self.config.model_save_weights)
-        #eval_test(self.model)
-        eval('O0', 'O3', self.model)
-        eval('O1', 'O3', self.model)
-        eval('O2', 'O3', self.model)
-        eval('O0', 'Os', self.model)
-        eval('O1', 'Os', self.model)
-        eval('O2', 'Os', self.model)
-
+        # eval_test(self.model)
+        mrr_O0_O3, recall_O0_O3 = eval('O0', 'O3', self.model)
+        mrr_O1_O3, recall_O1_O3 = eval('O1', 'O3', self.model)
+        mrr_O2_O3, recall_O2_O3 = eval('O2', 'O3', self.model)
+        mrr_O0_Os, recall_O0_Os = eval('O0', 'Os', self.model)
+        mrr_O1_Os, recall_O1_Os = eval('O1', 'Os', self.model)
+        mrr_O2_Os, recall_O2_Os = eval('O2', 'Os', self.model)
+        self.result["O0-O3"] = [mrr_O0_O3, recall_O0_O3]
+        self.result["O1-O3"] = [mrr_O1_O3, recall_O1_O3]
+        self.result["O2-O3"] = [mrr_O2_O3, recall_O2_O3]
+        self.result["OO-Os"] = [mrr_O0_Os, recall_O0_Os]
+        self.result["O1-Os"] = [mrr_O1_Os, recall_O1_Os]
+        self.result["O2-Os"] = [mrr_O2_Os, recall_O2_Os]
+        self.result["averge"] =[(mrr_O0_O3+mrr_O1_O3+mrr_O2_O3+mrr_O0_Os+mrr_O1_Os+mrr_O2_Os)/6,(recall_O0_O3+recall_O1_O3
+                                                                                                 +recall_O2_O3+recall_O0_Os+recall_O1_Os+recall_O2_Os)/6]
+        print(self.result)
     # get lr
     def get_lr_metric(self, optimizer):
         def lr(y_true, y_pred):
@@ -271,8 +285,9 @@ class Lstm1(tf.keras.Model):
     def __init__(self, Config):
         super(Lstm1, self).__init__()
         self.config = Config
-        self.LS1 = tf.keras.layers.LSTM(self.config.f_dim, kernel_initializer='glorot_uniform', dropout=0.3,
-                                        return_sequences=False, activation='tanh')
+        self.LS1 = tf.keras.layers.Bidirectional(
+            tf.keras.layers.LSTM(int(self.config.f_dim / 2), kernel_initializer='glorot_uniform', dropout=0.3,
+                                 return_sequences=False, activation='tanh'))
 
     def call(self, inputs):
         # output=self.LS1(inputs)
